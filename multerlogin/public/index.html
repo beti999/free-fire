@@ -3,47 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Upload Image</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <div class="container">
-    <h2>Login</h2>
-    <form id="loginForm">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+    <h2>Upload Profile Image</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <label for="profileImage">Select Image (JPEG only):</label>
+      <input type="file" id="profileImage" name="profileImage" accept=".jpeg,.jpg" required>
 
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-
-      <button type="submit">Login</button>
+      <button type="submit">Upload</button>
     </form>
-    <p id="loginMessage"></p>
-    <a href="/signup.html">Don't have an account? Signup</a>
+    <p id="uploadMessage"></p>
+    <a href="/logout">Logout</a>
   </div>
 
   <script>
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    document.getElementById('uploadForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData(e.target);
 
-      const res = await fetch('/login', {
+      const res = await fetch('/upload', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: formData.get('email'),
-          password: formData.get('password'),
-        }),
+        body: formData,
       });
 
-      const message = await res.json();
-      document.getElementById('loginMessage').innerText = message.message;
-
-      if (res.ok) {
-        window.location.href = '/upload.html'; // Redirect to upload page on successful login
-      }
+      const message = await res.text();
+      document.getElementById('uploadMessage').innerText = message;
     });
   </script>
 </body>
