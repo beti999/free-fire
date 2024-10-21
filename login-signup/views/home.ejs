@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"href="/stylesheets/style.css">
+</head>
+<body>
+    <div class="container">
+       <h2>Welcome to our website</h2>
+       <a href="/additem">Add item</a>
+       <a href="/remove">Remove item</a>
+       <a href="/update">Update item</a>
+       <a href="/logout">Log out</a>
+       <% if (locals.item) { %>
+        <table border="2">
+         <thead>
+            <tr>
+                <th>Model name</th>
+                <th>Model no.</th>
+                <th>price</th>
+            </tr>
+         </thead>
+         <tbody>
+            <% item.forEach(element => { %>
+             <tr>
+                <td><%= element.name %></td>
+                <td><%= element.model %></td>
+                <td><%= element.price %></td>
+             </tr>
+            <% }) %>
+         </tbody>
+        </table>
+        
+       <% } %>
+    </div>
+    </body>
+</html>
