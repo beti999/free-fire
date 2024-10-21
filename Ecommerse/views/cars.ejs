@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Your Cart</title>
+</head>
+<body>
+    <h1>Your Cart</h1>
+    <ul>
+        <% cart.forEach(item => { %>
+            <li>Product ID: <%= item %></li>
+        <% }) %>
+    </ul>
+    <form action="/cart/clear" method="POST">
+        <button type="submit">Clear Cart</button>
+    </form>
+    <form action="/cart/checkout" method="POST">
+        <button type="submit">Checkout</button>
+    </form>
+    <a href="/">Continue Shopping</a>
+</body>
+</html>
